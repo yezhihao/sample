@@ -22,8 +22,10 @@ import org.sample.commons.lang.StringUtils;
 import org.sample.entity.Pagination;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /** MyBatis分页拦截器 */
+@Component
 @Intercepts({ @Signature(type = StatementHandler.class, method = "prepare", args = { Connection.class, Integer.class }) })
 public class PageInterceptor implements Interceptor {
 

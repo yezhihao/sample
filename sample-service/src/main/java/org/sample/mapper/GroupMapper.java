@@ -1,7 +1,9 @@
 package org.sample.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.sample.model.Group;
 
+@Mapper
 public interface GroupMapper {
 
     int deleteById(Integer id);

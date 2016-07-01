@@ -3,9 +3,11 @@ package org.sample.mapper;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.sample.model.Seckill;
 
+@Mapper
 public interface SeckillMapper {
 
     int deleteById(Integer id);

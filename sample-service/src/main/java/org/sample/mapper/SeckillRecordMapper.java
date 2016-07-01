@@ -2,9 +2,11 @@ package org.sample.mapper;
 
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.sample.model.SeckillRecord;
 
+@Mapper
 public interface SeckillRecordMapper {
 
     int deleteById(@Param("seckillId") Integer seckillId, @Param("userMobile") String userMobile);
