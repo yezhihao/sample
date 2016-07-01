@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="MyBatis3NoClient" targetRuntime="MyBatis3" defaultModelType="flat">
+
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+            <property name="suppressDate" value="false" />
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/test" userId="root" password="abc@123" />
+
+        <javaModelGenerator targetPackage="org.sample.model" targetProject="src\test\resources">
+            <property name="enableSubPackages" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="sqlMap" targetProject="src\test\resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="org.sample.mapper" targetProject="src\test\resources" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table tableName="seckill" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false" />
+        <table tableName="seckill_record" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false" />
+
+    </context>
+</generatorConfiguration>
