@@ -3,8 +3,8 @@ package org.sample.service;
 import java.util.List;
 
 import org.sample.api.UserService;
-import org.sample.entity.Pagination;
-import org.sample.entity.PaginationResult;
+import org.sample.model.PageInfo;
+import org.sample.model.PaginationResult;
 import org.sample.manager.UserManager;
 import org.sample.mapper.UserMapper;
 import org.sample.model.User;
@@ -54,19 +54,19 @@ public class UserServiceImpl implements UserService {
     @RequestMapping(value = "search", method = RequestMethod.GET)
     @ResponseBody
     public PaginationResult<User> search(@RequestParam Integer index, @RequestParam(required = false, defaultValue = "1") Integer groupId) {
-        Pagination pagination = new Pagination(index);
+        PageInfo pageInfo = new PageInfo(index);
         User user = new User();
         user.setGroupId(groupId);
-        user.setPagination(pagination);
+        user.setPageInfo(pageInfo);
 
         List<User> list = dao.select(user);
-        return new PaginationResult<>(list, pagination);
+        return new PaginationResult<>(list, pageInfo);
     }
 
     @RequestMapping(value = "search", method = RequestMethod.POST)
     @ResponseBody
     public PaginationResult<User> search(@RequestBody User user) {
         List<User> list = dao.select(user);
-        return new PaginationResult<>(list, user.getPagination());
+        return new PaginationResult<>(list, user.getPageInfo());
     }
 }

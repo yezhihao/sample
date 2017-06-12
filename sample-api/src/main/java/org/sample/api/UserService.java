@@ -1,6 +1,6 @@
 package org.sample.api;
 
-import org.sample.entity.PaginationResult;
+import org.sample.model.PaginationResult;
 import org.sample.model.User;
 
 public interface UserService {

@@ -8,7 +8,7 @@ import org.apache.commons.collections.map.LRUMap;
 import org.sample.commons.lang.MapUtils;
 import org.sample.dto.Exposer;
 import org.sample.enums.ResultCode;
-import org.sample.exception.BusinessException;
+import org.sample.exception.APIException;
 import org.sample.manager.SeckillManager;
 import org.sample.mapper.SeckillMapper;
 import org.sample.mapper.SeckillRecordMapper;
@@ -75,16 +75,16 @@ public class SeckillManagerImpl implements SeckillManager {
     @Override
     public SeckillRecord executeSeckill(int seckillId, String userMobile, String md5) {
         if (md5 == null || !md5.equalsIgnoreCase(getMD5(seckillId)))
-            throw new BusinessException(ResultCode.S401);
+            throw new APIException(ResultCode.S401);
 
         SeckillRecord record = new SeckillRecord(seckillId, userMobile);
         int row = recordMapper.insert(record);
         if (row <= 0) {
-            throw new BusinessException(ResultCode.S403);
+            throw new APIException(ResultCode.S403);
         } else {
             row = seckillMapper.reduceCount(seckillId, new Date());
             if (row <= 0)
-                throw new BusinessException(ResultCode.S402);
+                throw new APIException(ResultCode.S402);
         }
         return record;
     }
@@ -93,7 +93,7 @@ public class SeckillManagerImpl implements SeckillManager {
     @Override
     public SeckillRecord executeSeckillProcedure(int seckillId, String userMobile, String md5) {
         if (md5 == null || !md5.equalsIgnoreCase(getMD5(seckillId)))
-            throw new BusinessException(ResultCode.S401);
+            throw new APIException(ResultCode.S401);
         Date killTime = new Date();
         Map<String, Object> params = new HashMap<>();
         params.put("seckillId", seckillId);
@@ -105,10 +105,10 @@ public class SeckillManagerImpl implements SeckillManager {
         if (row == 0)
             return new SeckillRecord(seckillId, userMobile, killTime);
         else if (row == -1)
-            throw new BusinessException(ResultCode.S403);
+            throw new APIException(ResultCode.S403);
         else if (row == -2)
-            throw new BusinessException(ResultCode.S402);
+            throw new APIException(ResultCode.S402);
         else
-            throw new BusinessException(ResultCode.S500);
+            throw new APIException(ResultCode.S500);
     }
 }

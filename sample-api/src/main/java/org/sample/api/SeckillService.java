@@ -1,7 +1,7 @@
 package org.sample.api;
 
 import org.sample.dto.Exposer;
-import org.sample.entity.PaginationResult;
+import org.sample.model.PaginationResult;
 import org.sample.model.Seckill;
 import org.sample.model.SeckillRecord;
 

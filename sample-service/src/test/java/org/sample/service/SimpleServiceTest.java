@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.sample.commons.HttpTest;
 import org.sample.commons.MultiThreadTest;
 import org.sample.commons.io.JsonUtils;
-import org.sample.entity.Pagination;
-import org.sample.entity.PaginationResult;
+import org.sample.model.PageInfo;
+import org.sample.model.PaginationResult;
 import org.sample.model.User;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -32,8 +32,8 @@ public class SimpleServiceTest extends HttpTest {
                 try {
                     PaginationResult<User> result = JsonUtils.toObj(response, new TypeReference<PaginationResult<User>>() {
                     });
-                    Pagination pagination = result.getPagination();
-                    pagination.getTotalRows();
+                    PageInfo pageInfo = result.getPageInfo();
+                    pageInfo.getTotal();
                     List<User> list = result.getList();
                     User user = list.get(0);
                     user.getUsername();
@@ -57,8 +57,8 @@ public class SimpleServiceTest extends HttpTest {
 
                     PaginationResult<User> result = JsonUtils.toObj(response, new TypeReference<PaginationResult<User>>() {
                     });
-                    Pagination pagination = result.getPagination();
-                    pagination.getTotalRows();
+                    PageInfo pageInfo = result.getPageInfo();
+                    pageInfo.getTotal();
                     List<User> list = result.getList();
                     User user = list.get(0);
                     user.getUsername();

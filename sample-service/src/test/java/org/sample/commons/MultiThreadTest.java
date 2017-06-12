@@ -2,7 +2,7 @@ package org.sample.commons;
 
 import java.util.Date;
 
-import org.sample.entity.Pagination;
+import org.sample.model.PageInfo;
 import org.sample.model.Group;
 import org.sample.model.User;
 
@@ -16,18 +16,18 @@ public class MultiThreadTest {
 
     public static void main(String[] args) {
 
-        Pagination pagination = new Pagination(10, 10);
+        PageInfo pageInfo = new PageInfo(10, 10);
         final Group group = new Group();
         group.setId(54351353);
         group.setName("adsads564asd安德森");
         group.setCreateTime(new Date());
-        group.setPagination(pagination);
+        group.setPageInfo(pageInfo);
 
         for (int i = 0; i < 30; i++) {
             User user = new User();
             user.setId(65468456 + i);
             user.setGroupId(654565 + i);
-            user.setPagination(pagination);
+            user.setPageInfo(pageInfo);
             user.setCreateTime(new Date());
             user.setUsername("第三方" + i);
             group.addUser(user);

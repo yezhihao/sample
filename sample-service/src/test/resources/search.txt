@@ -1,1 +1,1 @@
-{"groupId":2,"pagination":{"showTotalPages":true,"pageSize":50,"pageNumber":1}}
+{"groupId":2,"pageInfo":{"showTotalPages":true,"size":50,"number":1}}

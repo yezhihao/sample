@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.sample.Application;
-import org.sample.entity.Pagination;
+import org.sample.model.PageInfo;
 import org.sample.model.Seckill;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +44,7 @@ public class SeckillMapperTest {
     @Test
     public void testSelect() {
         Seckill record = new Seckill();
-        record.setPagination(new Pagination(1, 1));
+        record.setPageInfo(new PageInfo(1, 1));
         List<Seckill> result = mapper.select(record);
         log.info(result.toString());
         Assert.assertTrue(!result.isEmpty());

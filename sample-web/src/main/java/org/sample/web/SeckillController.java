@@ -3,9 +3,9 @@ package org.sample.web;
 import org.sample.api.SeckillService;
 import org.sample.api.impl.SeckillServiceImpl;
 import org.sample.dto.Exposer;
-import org.sample.entity.PaginationResult;
+import org.sample.model.PaginationResult;
 import org.sample.enums.ResultCode;
-import org.sample.exception.BusinessException;
+import org.sample.exception.APIException;
 import org.sample.model.Seckill;
 import org.sample.model.SeckillRecord;
 import org.springframework.stereotype.Controller;
@@ -53,12 +53,12 @@ public class SeckillController {
             @PathVariable String md5, //
             @CookieValue(value = "userMobile", required = false) String userMobile) {
         if (userMobile == null)
-            throw new BusinessException(ResultCode.S400);
+            throw new APIException(ResultCode.S400);
         SeckillRecord result = service.execute(seckillId, md5, userMobile);
         return result;
     }
 
-    @RequestMapping(value = "time/now ", method = RequestMethod.GET)
+    @RequestMapping(value = "time/now", method = RequestMethod.GET)
     @ResponseBody
     public long currentTime() {
         return System.currentTimeMillis();

@@ -4,7 +4,7 @@ import org.sample.api.SeckillService;
 import org.sample.commons.io.JsonUtils;
 import org.sample.commons.net.HttpClient;
 import org.sample.dto.Exposer;
-import org.sample.entity.PaginationResult;
+import org.sample.model.PaginationResult;
 import org.sample.model.Seckill;
 import org.sample.model.SeckillRecord;
 

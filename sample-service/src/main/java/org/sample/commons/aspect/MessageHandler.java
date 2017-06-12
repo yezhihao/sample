@@ -4,8 +4,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.sample.entity.BaseVO;
-import org.sample.exception.BusinessException;
+import org.sample.model.BaseVO;
+import org.sample.exception.APIException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -28,7 +28,7 @@ public class MessageHandler {
     public Object around(ProceedingJoinPoint point) {
         try {
             return point.proceed();
-        } catch (BusinessException e) {
+        } catch (APIException e) {
             log.debug("业务异常:", e);
             return new BaseVO(e);
         } catch (Throwable e) {

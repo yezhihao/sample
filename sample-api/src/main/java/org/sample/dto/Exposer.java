@@ -1,6 +1,6 @@
 package org.sample.dto;
 
-import org.sample.entity.BaseVO;
+import org.sample.model.BaseVO;
 
 public class Exposer extends BaseVO {
 

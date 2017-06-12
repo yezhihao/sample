@@ -2,8 +2,6 @@ package org.sample.model;
 
 import java.util.Date;
 
-import org.sample.entity.BaseBO;
-
 public class SeckillRecord extends BaseBO {
 
     private Integer seckillId;

@@ -5,7 +5,7 @@ import java.util.Date;
 import org.sample.api.SimpleService;
 import org.sample.commons.redis.RedisClient;
 import org.sample.enums.ResultCode;
-import org.sample.exception.BusinessException;
+import org.sample.exception.APIException;
 import org.sample.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,7 +41,7 @@ public class SimpleServiceImpl implements SimpleService {
     @RequestMapping(value = "warn")
     @ResponseBody
     public void testWarn(@RequestParam(required = false, defaultValue = "发生错误！") String message) {
-        throw new BusinessException(ResultCode.S300, message);
+        throw new APIException(ResultCode.S300, message);
     }
 
     @RequestMapping(value = "throw")

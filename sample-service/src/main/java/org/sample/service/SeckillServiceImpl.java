@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.sample.api.SeckillService;
 import org.sample.dto.Exposer;
-import org.sample.entity.Pagination;
-import org.sample.entity.PaginationResult;
+import org.sample.model.PageInfo;
+import org.sample.model.PaginationResult;
 import org.sample.enums.ResultCode;
-import org.sample.exception.BusinessException;
+import org.sample.exception.APIException;
 import org.sample.manager.SeckillManager;
 import org.sample.mapper.SeckillMapper;
 import org.sample.model.Seckill;
@@ -33,9 +33,9 @@ public class SeckillServiceImpl implements SeckillService {
     @RequestMapping(value = "list/{index}", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public PaginationResult<Seckill> search(@PathVariable Integer index) {
-        Pagination pagination = new Pagination(index);
-        List<Seckill> list = mapper.select(new Seckill(pagination));
-        return new PaginationResult<>(list, pagination);
+        PageInfo pageInfo = new PageInfo(index);
+        List<Seckill> list = mapper.select(new Seckill(pageInfo));
+        return new PaginationResult<>(list, pageInfo);
     }
 
     @RequestMapping(value = "{seckillId}/detail", method = RequestMethod.GET, produces = "application/json")
@@ -58,7 +58,7 @@ public class SeckillServiceImpl implements SeckillService {
             @PathVariable String md5, //
             @CookieValue(value = "userMobile", required = false) String userMobile) {
         if (userMobile == null)
-            throw new BusinessException(ResultCode.S400);
+            throw new APIException(ResultCode.S400);
         SeckillRecord result = manager.executeSeckillProcedure(seckillId, userMobile, md5);
         return result;
     }
@@ -69,7 +69,7 @@ public class SeckillServiceImpl implements SeckillService {
             @PathVariable String md5, //
             @PathVariable String userMobile) {
         if (userMobile == null)
-            throw new BusinessException(ResultCode.S400);
+            throw new APIException(ResultCode.S400);
         SeckillRecord result = manager.executeSeckillProcedure(seckillId, userMobile, md5);
         return result;
     }

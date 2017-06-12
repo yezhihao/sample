@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.sample.entity.BaseBO;
-
 public class Group extends BaseBO {
 
     /** 组名 */

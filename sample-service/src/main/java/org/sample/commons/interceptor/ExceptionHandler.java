@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.sample.exception.BusinessException;
+import org.sample.exception.APIException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object object, Exception exception) {
         String result = null;
 
-        if (exception instanceof BusinessException) {
+        if (exception instanceof APIException) {
             result = exception.toString();
             log.debug("业务异常:", exception);
         } else {

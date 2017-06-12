@@ -19,7 +19,7 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.apache.ibatis.scripting.defaults.DefaultParameterHandler;
 import org.sample.commons.lang.StringUtils;
-import org.sample.entity.Pagination;
+import org.sample.model.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,17 +39,17 @@ public class PageInterceptor implements Interceptor {
         MappedStatement mappedStatement = (MappedStatement) metaStatementHandler.getValue("delegate.mappedStatement");
 
         if (isPagination(mappedStatement.getId())) {
-            Pagination pagination = (Pagination) metaStatementHandler.getValue("delegate.boundSql.parameterObject.pagination");
+            PageInfo pageInfo = (PageInfo) metaStatementHandler.getValue("delegate.boundSql.parameterObject.pageInfo");
 
-            if (pagination != null) {
+            if (pageInfo != null) {
                 BoundSql boundSql = statementHandler.getBoundSql();
 
-                if (pagination.isShowTotalPages()) {
+                if (pageInfo.isShowTotalPages()) {
                     Connection connection = (Connection) invocation.getArgs()[0];
                     int totalRows = getTotalRows(mappedStatement, connection, boundSql);
-                    pagination.setTotalRows(totalRows);
+                    pageInfo.setTotal(totalRows);
                 }
-                String pageSql = buildPageSql(boundSql.getSql(), pagination);
+                String pageSql = buildPageSql(boundSql.getSql(), pageInfo);
                 metaStatementHandler.setValue("delegate.boundSql.sql", pageSql);
             }
         }
@@ -92,12 +92,12 @@ public class PageInterceptor implements Interceptor {
     }
 
     /** 构建分页SQL */
-    private static String buildPageSql(String sql, Pagination page) {
+    private static String buildPageSql(String sql, PageInfo page) {
         StringBuilder pageSql = new StringBuilder(sql);
         pageSql.append(" limit ");
-        pageSql.append(page.getFirstRowIndex());
+        pageSql.append(page.getOffset());
         pageSql.append(", ");
-        pageSql.append(page.getPageSize());
+        pageSql.append(page.getSize());
         return pageSql.toString();
     }
 

@@ -1,7 +1,7 @@
 package org.sample.api.impl;
 
 import org.sample.api.UserService;
-import org.sample.entity.PaginationResult;
+import org.sample.model.PaginationResult;
 import org.sample.model.User;
 
 public enum UserServiceImpl implements UserService {

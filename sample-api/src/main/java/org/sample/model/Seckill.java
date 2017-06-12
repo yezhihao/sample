@@ -2,9 +2,6 @@ package org.sample.model;
 
 import java.util.Date;
 
-import org.sample.entity.BaseBO;
-import org.sample.entity.Pagination;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Seckill extends BaseBO {
@@ -22,8 +19,8 @@ public class Seckill extends BaseBO {
     public Seckill() {
     }
 
-    public Seckill(Pagination pagination) {
-        this.pagination = pagination;
+    public Seckill(PageInfo pageInfo) {
+        this.pageInfo = pageInfo;
     }
 
     public String getName() {
