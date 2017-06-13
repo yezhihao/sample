@@ -4,37 +4,38 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.sample.model.BaseVO;
-import org.sample.exception.APIException;
+import org.sample.commons.StopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
+/**
+ * 切面
+ */
 @Order
 @Aspect
-// @Component
-/** 切面 */
+@Component
 public class MessageHandler {
 
     private static final Logger log = LoggerFactory.getLogger(MessageHandler.class.getSimpleName());
 
-    /** 切点 */
-    @Pointcut("execution(public * org.sample.service.*.*(..))")
+    /**
+     * 切点
+     */
+    @Pointcut("execution(public * org.sample.controller.*.*(..))")
     public void pointcut() {
     }
 
-    /** 通知 */
+    /**
+     * 环绕通知
+     */
     @Around(value = "pointcut()")
-    public Object around(ProceedingJoinPoint point) {
-        try {
-            return point.proceed();
-        } catch (APIException e) {
-            log.debug("业务异常:", e);
-            return new BaseVO(e);
-        } catch (Throwable e) {
-            log.error("系统出错:", e);
-            return new BaseVO(e);
-        }
+    public Object around(ProceedingJoinPoint point) throws Throwable {
+        StopWatch watch = new StopWatch();
+        Object result = point.proceed();
+        log.info(point.getSignature().getName() + watch.show());
+        return result;
     }
 
 // private static void log(JoinPoint point, Object result) {

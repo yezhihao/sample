@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.sample.Application;
 import org.sample.api.SimpleService;
 import org.sample.api.UserService;
+import org.sample.model.APIResult;
 import org.sample.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,13 +32,13 @@ public class UserMapperTest {
 
     @Test
     public void test() {
-        User user = service.test("dddd");
+        APIResult<User> user = service.test("dddd");
         System.out.println(user);
     }
 
     @Test
     public void get() {
-        User user = userservice.get(100);
+        APIResult<User> user = userservice.get(100);
         System.out.println(user);
     }
 
