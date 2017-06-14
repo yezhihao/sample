@@ -33,7 +33,7 @@ spring:
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
 mybatis:
-  type-aliases-package: org.sample.model
+  type-aliases-package: org.sample.seckill.model
   config-location: classpath:mybatis-config.xml
   mapper-locations:
   - classpath*:/mapper/*.xml

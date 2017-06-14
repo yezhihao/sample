@@ -1,5 +1,5 @@
 <#import "spring.ftl" as s />
-<#assign getTime="org.sample.utils.TimeUtils"?new()>
+<#assign getTime="org.sample.web.utils.TimeUtils"?new()>
 <!DOCTYPE html>
 <html>
 <head>

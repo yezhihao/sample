@@ -3,7 +3,7 @@ package org.sample;
 import java.lang.reflect.Method;
 
 import org.sample.commons.lang.StringUtils;
-import org.sample.model.Seckill;
+import org.sample.seckill.model.Seckill;
 
 public class SQLGenerator {
 
