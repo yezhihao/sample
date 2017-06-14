@@ -8,8 +8,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>sample-api</module>
-        <module>sample-service</module>
-        <module>sample-web</module>
+        <module>seckill-api</module>
+        <module>seckill-service</module>
+        <module>seckill-web</module>
     </modules>
 </project>
