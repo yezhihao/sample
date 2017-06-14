@@ -23,7 +23,7 @@ var seckill = {
                         $.post(killUrl, {}, function (result) {
                             if (result) {
                                 var code = result['code'];
-                                var message = result['message'];
+                                var message = result['msg'];
                                 if (code == 0) {
                                     node.html('<span class="label label-danger">秒杀成功!</span>');
                                 } else {

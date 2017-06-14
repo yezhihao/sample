@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>org.sample</groupId>
-    <artifactId>sample-web</artifactId>
+    <artifactId>seckill-web</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -27,7 +27,7 @@
 
         <dependency>
             <groupId>org.sample</groupId>
-            <artifactId>sample-api</artifactId>
+            <artifactId>seckill-api</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -49,6 +49,15 @@
                     <artifactId>feign-hystrix</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-httpclient</artifactId>
+            <version>8.18.0</version>
         </dependency>
 
         <dependency>

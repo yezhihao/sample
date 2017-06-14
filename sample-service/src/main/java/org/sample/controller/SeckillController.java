@@ -2,43 +2,58 @@ package org.sample.controller;
 
 import java.util.List;
 
-import org.sample.api.SeckillService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.sample.dto.Exposer;
 import org.sample.model.*;
 import org.sample.enums.ResultCode;
 import org.sample.exception.APIException;
-import org.sample.manager.SeckillManager;
+import org.sample.service.SeckillService;
 import org.sample.mapper.SeckillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+@Api(description = "seckill")
 @Controller
-public class SeckillController implements SeckillService {
+@RequestMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+public class SeckillController {
 
     @Autowired
-    private SeckillManager manager;
+    private SeckillService manager;
 
     @Autowired
     private SeckillMapper mapper;
 
+    @ApiOperation(value = "查询")
+    @RequestMapping(value = "seckill/list/{index}", method = RequestMethod.GET)
+    @ResponseBody
     public APIResult<Pagination<Seckill>> search(@PathVariable Integer index) {
         PageInfo pageInfo = new PageInfo(index);
         List<Seckill> list = mapper.select(new Seckill(pageInfo));
         return new APIResult(new Pagination<>(list, pageInfo));
     }
 
+    @ApiOperation(value = "详情")
+    @RequestMapping(value = "seckill/{seckillId}/detail", method = RequestMethod.GET)
+    @ResponseBody
     public APIResult<Seckill> detail(@PathVariable Integer seckillId) {
         Seckill result = mapper.selectById(seckillId);
         return new APIResult(result);
     }
 
+    @ApiOperation(value = "查询是否开启")
+    @RequestMapping(value = "seckill/{seckillId}/exposer", method = RequestMethod.POST)
+    @ResponseBody
     public APIResult<Exposer> exposer(@PathVariable Integer seckillId) {
         Exposer result = manager.exportSeckillUrl(seckillId);
         return new APIResult(result);
     }
 
+    @ApiOperation(value = "执行秒杀")
+    @RequestMapping(value = "seckill/{seckillId}/{md5}/execution", method = RequestMethod.POST)
+    @ResponseBody
     public APIResult<SeckillRecord> execute(@PathVariable Integer seckillId, @PathVariable String md5,
                                             @RequestParam String userMobile) {
         if (userMobile == null)
