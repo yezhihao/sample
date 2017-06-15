@@ -6,6 +6,7 @@ import org.sample.model.Pagination;
 import org.sample.seckill.model.Seckill;
 import org.sample.seckill.model.SeckillRecord;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(url = "${seckill-service}", name = "SeckillService")
@@ -14,6 +15,10 @@ public interface SeckillService {
     @RequestMapping(value = "seckill/list/{index}", method = RequestMethod.GET)
     @ResponseBody
     APIResult<Pagination<Seckill>> search(@PathVariable("index") Integer index);
+
+    @RequestMapping(value = "seckill/list", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    APIResult<Pagination<Seckill>> search(@RequestBody Seckill seckill);
 
     @RequestMapping(value = "seckill/{seckillId}/detail", method = RequestMethod.GET)
     @ResponseBody

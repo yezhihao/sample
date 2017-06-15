@@ -1,5 +1,6 @@
 package org.sample.web.web;
 
+import org.sample.commons.lang.StringUtils;
 import org.sample.seckill.dto.Exposer;
 import org.sample.model.APIResult;
 import org.sample.model.Pagination;
@@ -9,6 +10,7 @@ import org.sample.seckill.model.Seckill;
 import org.sample.seckill.model.SeckillRecord;
 import org.sample.web.service.SeckillService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,9 +34,12 @@ public class SeckillController {
 
     @RequestMapping(value = "api/list", method = RequestMethod.GET)
     @ResponseBody
-    public List<Seckill> list(@RequestParam(value = "index", required = false, defaultValue = "1") Integer index) {
-        System.out.println(index);
-        Pagination<Seckill> result = service.search(index).getData();
+    @Cacheable(value = "seckill", key = "#name")
+    public List<Seckill> list(@RequestParam(value = "name", required = false) String name) {
+        Seckill seckill = new Seckill();
+        if (StringUtils.isNotBlank(name))
+            seckill.setName(name);
+        Pagination<Seckill> result = service.search(seckill).getData();
         return result.getList();
     }
 

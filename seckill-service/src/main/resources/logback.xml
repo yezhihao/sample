@@ -25,8 +25,8 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="org.apache.coyote.http11.InternalNioInputBuffer" level="DEBUG" additivity="true" />
-    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor" level="DEBUG" additivity="true" />
+    <!--<logger name="org.apache.coyote.http11.InternalNioInputBuffer" level="DEBUG" additivity="true" />-->
+    <!--<logger name="org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor" level="DEBUG" additivity="true" />-->
 
     <root level="INFO">
         <appender-ref ref="logfile" />

@@ -26,7 +26,6 @@ public class ExceptionController {
     @ExceptionHandler(APIException.class)
     @ResponseBody
     public APIResult onAPIException(APIException e) {
-        log.info("业务异常:", e);
         return new APIResult(e);
     }
 

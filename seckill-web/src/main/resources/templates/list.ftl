@@ -5,23 +5,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>秒杀页列表</title>
-    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="http://cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"/>
-    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"/>
-    <script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
-    <script src="http://cdn.bootcss.com/select2/4.0.3/js/i18n/zh-CN.js"></script>
-    <![endif] -->
+<#include "commons/css.ftl">
 </head>
 <body>
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading text-center">
             <h2>秒杀列表</h2>
-            <select name="test" class="select2" multiple>
-                <option>asd</option>
-            </select>
+            <select name="id" class="select2"></select>
         </div>
         <div class="panel-body">
             <table class="table table-hover">
@@ -52,27 +43,17 @@
     </div>
 </div>
 </body>
-<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
-<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
-<script src="http://cdn.bootcss.com/select2/4.0.3/js/i18n/zh-CN.js"></script>
+<#include "commons/script.ftl">
 <script>
     $(".select2").select2({
-        language: "zh-CN", //设置 提示语言
-        width: "100%", //设置下拉框的宽度
-        placeholder: "请选择",
-        allowClear: true,
-        tags: true,
-        maximumSelectionLength: 2,  //设置最多可以选择多少项
         ajax: {
             url: "api/list",
-            data: function (term, page) {
+            data: function (params) {
                 return {
-                    index: term.term
+                    name: params.term
                 };
             },
-            cache: true,
-            processResults: function (data, page) {
+            processResults: function (data, params) {
                 var arr = [];
                 for (x in data) {
                     var t = {};
@@ -84,8 +65,15 @@
                 return {
                     results: arr
                 };
-            }
-        }
+            },
+            cache: true
+        },
+        language: "zh-CN", //设置 提示语言
+        width: "100%", //设置下拉框的宽度
+        placeholder: "请选择",
+        allowClear: true,
+        minimumInputLength: 1,
+        maximumSelectionLength: 1//设置最多可以选择多少项
     });
 </script>
 </html>

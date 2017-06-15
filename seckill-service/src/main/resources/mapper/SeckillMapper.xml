@@ -3,12 +3,12 @@
 <mapper namespace="org.sample.seckill.mapper.SeckillMapper">
 
     <resultMap id="BaseResultMap" type="Seckill">
-        <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="count" property="count" jdbcType="INTEGER" />
-        <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
-        <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -17,7 +17,7 @@
 
     <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from seckill
         where id = #{id,jdbcType=BIGINT}
     </select>
@@ -28,7 +28,7 @@
         from Seckill
         <where>
             <if test="name != null">
-                and name=#{name}
+                and name like concat(#{name},'%')
             </if>
             <if test="id != null">
                 and id=#{id}
@@ -126,7 +126,7 @@
         and id = #{id,jdbcType=BIGINT}
         and start_time <= #{killTime}
         and end_time >= #{killTime}
-	   ]]>
+        ]]>
     </update>
 
 </mapper>

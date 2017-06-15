@@ -36,4 +36,4 @@ mybatis:
   type-aliases-package: org.sample.seckill.model
   config-location: classpath:mybatis-config.xml
   mapper-locations:
-  - classpath*:/mapper/*.xml
+  - classpath:/mapper/*.xml
