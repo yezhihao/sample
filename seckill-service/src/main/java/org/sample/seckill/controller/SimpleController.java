@@ -5,9 +5,9 @@ import java.util.Date;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.sample.seckill.commons.redis.RedisClient;
-import org.sample.seckill.enums.ResultCode;
 import org.sample.exception.APIException;
 import org.sample.model.APIResult;
+import org.sample.seckill.enums.ResultCodes;
 import org.sample.seckill.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,7 +45,7 @@ public class SimpleController {
     @RequestMapping(value = "warn")
     @ResponseBody
     public void testWarn(@RequestParam(required = false, defaultValue = "发生错误！") String message) {
-        throw new APIException(ResultCode.S300, message);
+        throw new APIException(ResultCodes.S300, message);
     }
 
     @ApiOperation(value = "throw")

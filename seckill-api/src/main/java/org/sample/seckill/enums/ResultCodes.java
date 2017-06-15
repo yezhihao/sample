@@ -1,8 +1,8 @@
 package org.sample.seckill.enums;
 
-import org.sample.enums.ResultState;
+import org.sample.enums.ResultCode;
 
-public enum ResultCode implements ResultState {
+public enum ResultCodes implements ResultCode {
 
     S000(0, "成功"), //
 
@@ -20,7 +20,7 @@ public enum ResultCode implements ResultState {
 
     private final String message;
 
-    ResultCode(int code, String message) {
+    ResultCodes(int code, String message) {
         this.code = code;
         this.message = message;
     }

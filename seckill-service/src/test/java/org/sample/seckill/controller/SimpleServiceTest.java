@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.sample.seckill.commons.HttpTest;
 import org.sample.seckill.commons.MultiThreadTest;
 import org.sample.commons.io.JsonUtils;
-import org.sample.model.PageInfo;
 import org.sample.model.Pagination;
 import org.sample.seckill.model.User;
 
@@ -32,8 +31,6 @@ public class SimpleServiceTest extends HttpTest {
                 try {
                     Pagination<User> result = JsonUtils.toObj(response, new TypeReference<Pagination<User>>() {
                     });
-                    PageInfo pageInfo = result.getPageInfo();
-                    pageInfo.getTotal();
                     List<User> list = result.getList();
                     User user = list.get(0);
                     user.getUsername();
@@ -57,8 +54,6 @@ public class SimpleServiceTest extends HttpTest {
 
                     Pagination<User> result = JsonUtils.toObj(response, new TypeReference<Pagination<User>>() {
                     });
-                    PageInfo pageInfo = result.getPageInfo();
-                    pageInfo.getTotal();
                     List<User> list = result.getList();
                     User user = list.get(0);
                     user.getUsername();

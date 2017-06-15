@@ -67,7 +67,7 @@ public class UserController {
         user.setPageInfo(pageInfo);
 
         List<User> list = dao.select(user);
-        return new APIResult(new Pagination<>(list, pageInfo));
+        return new APIResult(new Pagination(pageInfo,list));
     }
 
     @ApiOperation(value = "search")
@@ -75,6 +75,6 @@ public class UserController {
     @ResponseBody
     public APIResult<Pagination<User>> search(@RequestBody User user) {
         List<User> list = dao.select(user);
-        return new APIResult(new Pagination<>(list, user.getPageInfo()));
+        return new APIResult(new Pagination(user.getPageInfo(),list));
     }
 }

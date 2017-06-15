@@ -7,8 +7,8 @@ import java.util.Map;
 import org.apache.commons.collections.map.LRUMap;
 import org.sample.commons.lang.MapUtils;
 import org.sample.seckill.dto.Exposer;
-import org.sample.seckill.enums.ResultCode;
 import org.sample.exception.APIException;
+import org.sample.seckill.enums.ResultCodes;
 import org.sample.seckill.service.SeckillService;
 import org.sample.seckill.mapper.SeckillMapper;
 import org.sample.seckill.mapper.SeckillRecordMapper;
@@ -75,16 +75,16 @@ public class SeckillServiceImpl implements SeckillService {
     @Override
     public SeckillRecord executeSeckill(int seckillId, String userMobile, String md5) {
         if (md5 == null || !md5.equalsIgnoreCase(getMD5(seckillId)))
-            throw new APIException(ResultCode.S401);
+            throw new APIException(ResultCodes.S401);
 
         SeckillRecord record = new SeckillRecord(seckillId, userMobile);
         int row = recordMapper.insert(record);
         if (row <= 0) {
-            throw new APIException(ResultCode.S403);
+            throw new APIException(ResultCodes.S403);
         } else {
             row = seckillMapper.reduceCount(seckillId, new Date());
             if (row <= 0)
-                throw new APIException(ResultCode.S402);
+                throw new APIException(ResultCodes.S402);
         }
         return record;
     }
@@ -93,7 +93,7 @@ public class SeckillServiceImpl implements SeckillService {
     @Override
     public SeckillRecord executeSeckillProcedure(int seckillId, String userMobile, String md5) {
         if (md5 == null || !md5.equalsIgnoreCase(getMD5(seckillId)))
-            throw new APIException(ResultCode.S401);
+            throw new APIException(ResultCodes.S401);
         Date killTime = new Date();
         Map<String, Object> params = new HashMap<>();
         params.put("seckillId", seckillId);
@@ -105,10 +105,10 @@ public class SeckillServiceImpl implements SeckillService {
         if (row == 0)
             return new SeckillRecord(seckillId, userMobile, killTime);
         else if (row == -1)
-            throw new APIException(ResultCode.S403);
+            throw new APIException(ResultCodes.S403);
         else if (row == -2)
-            throw new APIException(ResultCode.S402);
+            throw new APIException(ResultCodes.S402);
         else
-            throw new APIException(ResultCode.S500);
+            throw new APIException(ResultCodes.S500);
     }
 }

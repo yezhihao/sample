@@ -3,20 +3,21 @@
 <mapper namespace="org.sample.seckill.mapper.UserMapper">
 
     <resultMap id="BaseResultMap" type="User">
-        <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="username" property="username" jdbcType="VARCHAR" />
-        <result column="group_id" property="groupId" jdbcType="INTEGER" />
-        <result column="create_Time" property="createTime" jdbcType="TIMESTAMP" />
-        <result column="update_Time" property="updateTime" jdbcType="TIMESTAMP" />
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="group_id" property="groupId" jdbcType="INTEGER"/>
+        <result column="gender" property="gender" jdbcType="TINYINT"/>
+        <result column="create_Time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_Time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, username, group_Id groupId, create_Time createTime, update_Time updateTime
+        id, username, group_Id groupId,gender, create_Time createTime, update_Time updateTime
     </sql>
 
     <select id="select" resultMap="BaseResultMap" parameterType="User">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from user
         where group_id = #{groupId,jdbcType=INTEGER}
         order by id
@@ -24,7 +25,7 @@
 
     <select id="selectById" resultType="User" parameterType="java.lang.Integer">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from user
         where id = #{id,jdbcType=INTEGER}
     </select>

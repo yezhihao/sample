@@ -3,8 +3,8 @@ package org.sample.web.web;
 import org.sample.seckill.dto.Exposer;
 import org.sample.model.APIResult;
 import org.sample.model.Pagination;
-import org.sample.seckill.enums.ResultCode;
 import org.sample.exception.APIException;
+import org.sample.seckill.enums.ResultCodes;
 import org.sample.seckill.model.Seckill;
 import org.sample.seckill.model.SeckillRecord;
 import org.sample.web.service.SeckillService;
@@ -61,7 +61,7 @@ public class SeckillController {
     public APIResult<SeckillRecord> execute(@PathVariable Integer seckillId, @PathVariable String md5,
                                             @CookieValue(value = "userMobile", required = false) String userMobile) {
         if (userMobile == null)
-            throw new APIException(ResultCode.S400);
+            throw new APIException(ResultCodes.S400);
         APIResult<SeckillRecord> result = service.execute(seckillId, md5, userMobile);
         return result;
     }

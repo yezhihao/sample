@@ -1,20 +1,20 @@
 package org.sample.seckill.model;
 
 import org.sample.model.BaseBO;
+import org.sample.seckill.enums.Gender;
 
 import java.util.Date;
 
 public class User extends BaseBO {
 
-    /** 用户名 */
     private String username;
 
     private Group group;
 
-    /** 用户组id */
     private Integer groupId;
 
-    /** 更新日期 */
+    private Gender gender;
+
     private Date updateTime;
 
     public String getUsername() {
@@ -39,6 +39,14 @@ public class User extends BaseBO {
 
     public void setGroupId(Integer groupId) {
         this.groupId = groupId;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public Date getUpdateTime() {

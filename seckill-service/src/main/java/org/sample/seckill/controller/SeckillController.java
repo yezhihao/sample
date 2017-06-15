@@ -6,8 +6,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.sample.seckill.dto.Exposer;
 import org.sample.model.*;
-import org.sample.seckill.enums.ResultCode;
 import org.sample.exception.APIException;
+import org.sample.seckill.enums.ResultCodes;
 import org.sample.seckill.model.Seckill;
 import org.sample.seckill.model.SeckillRecord;
 import org.sample.seckill.service.SeckillService;
@@ -34,7 +34,15 @@ public class SeckillController {
     public APIResult<Pagination<Seckill>> search(@PathVariable Integer index) {
         PageInfo pageInfo = new PageInfo(index);
         List<Seckill> list = mapper.select(new Seckill(pageInfo));
-        return new APIResult(new Pagination<>(list, pageInfo));
+        return new APIResult(new Pagination(pageInfo, list));
+    }
+
+    @ApiOperation(value = "查询")
+    @RequestMapping(value = "seckill/list", method = RequestMethod.POST)
+    @ResponseBody
+    public APIResult<Pagination<Seckill>> search(@RequestBody Seckill seckill) {
+        List<Seckill> list = mapper.select(seckill);
+        return new APIResult(new Pagination(seckill.getPageInfo(), list));
     }
 
     @ApiOperation(value = "详情")
@@ -59,7 +67,7 @@ public class SeckillController {
     public APIResult<SeckillRecord> execute(@PathVariable Integer seckillId, @PathVariable String md5,
                                             @RequestParam String userMobile) {
         if (userMobile == null)
-            throw new APIException(ResultCode.S400);
+            throw new APIException(ResultCodes.S400);
         SeckillRecord result = manager.executeSeckillProcedure(seckillId, userMobile, md5);
         return new APIResult(result);
     }
