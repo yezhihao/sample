@@ -54,14 +54,14 @@ public class SeckillController {
         return "detail";
     }
 
-    @RequestMapping(value = "{seckillId}/exposer", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "{seckillId}/exposer", method = RequestMethod.POST)
     @ResponseBody
     public APIResult<Exposer> exposer(@PathVariable Integer seckillId) {
         APIResult<Exposer> result = service.exposer(seckillId);
         return result;
     }
 
-    @RequestMapping(value = "{seckillId}/{md5}/execution", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "{seckillId}/{md5}/execution", method = RequestMethod.POST)
     @ResponseBody
     public APIResult<SeckillRecord> execute(@PathVariable Integer seckillId, @PathVariable String md5,
                                             @CookieValue(value = "userMobile", required = false) String userMobile) {
