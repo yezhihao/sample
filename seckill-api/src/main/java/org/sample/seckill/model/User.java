@@ -9,6 +9,8 @@ public class User extends BaseBO {
 
     private String username;
 
+    private String password;
+
     private Group group;
 
     private Integer groupId;
@@ -17,12 +19,28 @@ public class User extends BaseBO {
 
     private Date updateTime;
 
+    public User() {
+    }
+
+    public User(Integer id, String username) {
+        this.id = id;
+        this.username = username;
+    }
+
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Group getGroup() {

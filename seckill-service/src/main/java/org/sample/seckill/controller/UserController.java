@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.sample.model.APIResult;
 import org.sample.model.PageInfo;
 import org.sample.model.Pagination;
+import org.sample.seckill.enums.ResultCodes;
 import org.sample.seckill.service.UserService;
 import org.sample.seckill.mapper.UserMapper;
 import org.sample.seckill.model.User;
@@ -49,12 +50,14 @@ public class UserController {
         return new APIResult(user);
     }
 
-    @ApiOperation(value = "get")
-    @RequestMapping(value = "get", method = RequestMethod.GET)
+    @ApiOperation(value = "login")
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     @ResponseBody
-    public APIResult<User> get(@RequestParam Integer id) {
-        User user = dao.selectById(id);
-        return new APIResult(user);
+    public APIResult<User> login(@RequestParam("username") String username, @RequestParam("password") String password) {
+        User user = dao.selectByUsername(username);
+        if (user != null && user.getPassword().equalsIgnoreCase(password))
+            return new APIResult(user);
+        return new APIResult(ResultCodes.NotFoundUser);
     }
 
     @ApiOperation(value = "search")
@@ -67,7 +70,7 @@ public class UserController {
         user.setPageInfo(pageInfo);
 
         List<User> list = dao.select(user);
-        return new APIResult(new Pagination(pageInfo,list));
+        return new APIResult(new Pagination(pageInfo, list));
     }
 
     @ApiOperation(value = "search")
@@ -75,6 +78,6 @@ public class UserController {
     @ResponseBody
     public APIResult<Pagination<User>> search(@RequestBody User user) {
         List<User> list = dao.select(user);
-        return new APIResult(new Pagination(user.getPageInfo(),list));
+        return new APIResult(new Pagination(user.getPageInfo(), list));
     }
 }

@@ -2,8 +2,8 @@
 
 <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
 <configuration>
-    <property name="APP_NAME" value="springboot" />
-    <property name="LOG_APP_HOME" value="logs/" />
+    <property name="APP_NAME" value="springboot"/>
+    <property name="LOG_APP_HOME" value="logs/"/>
 
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
@@ -29,8 +29,8 @@
     <!--<logger name="org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor" level="DEBUG" additivity="true" />-->
 
     <root level="INFO">
-        <appender-ref ref="logfile" />
-        <appender-ref ref="console" />
+        <appender-ref ref="logfile"/>
+        <appender-ref ref="console"/>
     </root>
 
 </configuration>

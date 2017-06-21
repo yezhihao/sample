@@ -16,6 +16,8 @@ public interface UserMapper {
 
     User selectById(Integer id);
 
+    User selectByUsername(String username);
+
     int update(User record);
 
 }

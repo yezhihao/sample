@@ -3,9 +3,9 @@ use test;
 
 DROP TABLE IF EXISTS `seckill`;
 CREATE TABLE seckill (
-    id int(11) NOT NULL AUTO_INCREMENT,
+    id int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
     name varchar(100) NOT NULL,
-    count int NOT NULL,
+    count int UNSIGNED NOT NULL,
     start_time datetime NOT NULL,
     end_time datetime NOT NULL,
     create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -18,7 +18,7 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `seckill_record`;
 CREATE TABLE seckill_record (
-    seckill_id int(11) NOT NULL,
+    seckill_id int(11) UNSIGNED NOT NULL,
     user_mobile varchar(16) NOT NULL,
     create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (seckill_id, user_mobile),

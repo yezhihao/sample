@@ -14,6 +14,7 @@ public enum ResultCodes implements ResultCode {
     S401(401, "数据校验未通过"), //
     S402(402, "秒杀结束"), //
     S403(403, "重复秒杀"), //
+    NotFoundUser(405, "找不到该用户"), //
     S500(500, "系统异常,请联系管理员.");
 
     private final int code;

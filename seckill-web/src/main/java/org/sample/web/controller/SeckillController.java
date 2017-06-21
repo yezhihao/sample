@@ -1,4 +1,4 @@
-package org.sample.web.web;
+package org.sample.web.controller;
 
 import org.sample.commons.lang.StringUtils;
 import org.sample.seckill.dto.Exposer;
@@ -11,7 +11,6 @@ import org.sample.seckill.model.SeckillRecord;
 import org.sample.web.service.SeckillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

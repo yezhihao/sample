@@ -3,18 +3,20 @@ use test;
 
 DROP TABLE IF EXISTS `User`;
 CREATE TABLE `User` (
-    id int(11) AUTO_INCREMENT,
+    id int(11) UNSIGNED AUTO_INCREMENT,
     username varchar(20),
-    group_id int(11),
-    gender TINYINT(2),
+    password char(32),
+    group_id int(11) UNSIGNED,
+    gender TINYINT(2) UNSIGNED,
     update_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    UNIQUE KEY idx_username(username)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `Group`;
 CREATE TABLE `Group` (
-    id int(11) AUTO_INCREMENT,
+    id int(11) UNSIGNED AUTO_INCREMENT,
     name varchar(20),
     update_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -5,6 +5,7 @@
     <resultMap id="BaseResultMap" type="User">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="CHAR"/>
         <result column="group_id" property="groupId" jdbcType="INTEGER"/>
         <result column="gender" property="gender" jdbcType="TINYINT"/>
         <result column="create_Time" property="createTime" jdbcType="TIMESTAMP"/>
@@ -12,7 +13,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, username, group_Id groupId,gender, create_Time createTime, update_Time updateTime
+        id, username, password, group_Id groupId,gender, create_Time createTime, update_Time updateTime
     </sql>
 
     <select id="select" resultMap="BaseResultMap" parameterType="User">
@@ -21,6 +22,13 @@
         from user
         where group_id = #{groupId,jdbcType=INTEGER}
         order by id
+    </select>
+
+    <select id="selectByUsername" resultType="User" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where username = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="selectById" resultType="User" parameterType="java.lang.Integer">
