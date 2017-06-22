@@ -1,7 +1,8 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:test
+    url: jdbc:h2:file:~/.h2/test;Auto_Server=True;IgnoreCase=True;Mode=MySql
     username: root
     password: abc@123
     name: test
@@ -11,6 +12,8 @@ spring:
       minimum-idle: 1
       maximum-pool-size: 10
       idle-timeout: 60000
+    schema: classpath:sql/database.sql
+    data: classpath:sql/initial.sql
   redis:
 #    database:
     host: 127.0.0.1

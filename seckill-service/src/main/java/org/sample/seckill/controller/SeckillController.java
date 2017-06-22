@@ -33,7 +33,7 @@ public class SeckillController {
     @ResponseBody
     public APIResult<Pagination<Seckill>> search(@PathVariable Integer index) {
         PageInfo pageInfo = new PageInfo(index);
-        List<Seckill> list = mapper.select(new Seckill(pageInfo));
+        List<Seckill> list = mapper.select(new Seckill());
         return new APIResult(new Pagination(pageInfo, list));
     }
 
@@ -68,7 +68,8 @@ public class SeckillController {
                                             @RequestParam String userMobile) {
         if (userMobile == null)
             throw new APIException(ResultCodes.S400);
-        SeckillRecord result = manager.executeSeckillProcedure(seckillId, userMobile, md5);
+//        SeckillRecord result = manager.executeSeckillProcedure(seckillId, userMobile, md5);
+        SeckillRecord result = manager.executeSeckill(seckillId, userMobile, md5);
         return new APIResult(result);
     }
 

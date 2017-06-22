@@ -14,7 +14,11 @@ public class WebMvcInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
         Object user = session.getAttribute(SessionKey.USER);
-        return user != null;
+        if (user == null) {
+            response.sendRedirect("/");
+            return false;
+        }
+        return true;
     }
 
     @Override

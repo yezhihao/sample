@@ -119,7 +119,7 @@
     </update>
 
     <update id="reduceCount">
-	   <![CDATA[
+        <![CDATA[
         update seckill
         set count = count - 1
         where count > 0

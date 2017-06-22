@@ -4,9 +4,9 @@
 <mapper namespace="org.sample.seckill.mapper.SeckillRecordMapper">
 
     <resultMap id="BaseResultMap" type="SeckillRecord">
-        <id column="seckill_id" property="seckillId" jdbcType="BIGINT" />
-        <id column="user_mobile" property="userMobile" jdbcType="VARCHAR" />
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <id column="seckill_id" property="seckillId" jdbcType="BIGINT"/>
+        <id column="user_mobile" property="userMobile" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -47,29 +47,20 @@
     </delete>
 
     <insert id="insert" parameterType="SeckillRecord">
-        insert ignore into seckill_record
+        insert into seckill_record
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="seckillId != null">
-                seckill_id,
-            </if>
-            <if test="userMobile != null">
-                user_mobile,
-            </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
+            <if test="seckillId != null">seckill_id,</if>
+            <if test="userMobile != null">user_mobile,</if>
+            <if test="createTime != null">create_time,</if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="seckillId != null">
-                #{seckillId,jdbcType=BIGINT},
-            </if>
-            <if test="userMobile != null">
-                #{userMobile,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
+        select
+        <trim suffixOverrides=",">
+            <if test="seckillId != null">#{seckillId,jdbcType=BIGINT},</if>
+            <if test="userMobile != null">#{userMobile,jdbcType=VARCHAR},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
         </trim>
+        from dual
+        where not exists(select seckill_id from seckill_record where seckill_id = #{seckillId,jdbcType=BIGINT})
     </insert>
 
     <update id="update" parameterType="SeckillRecord">
