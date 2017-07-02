@@ -5,16 +5,18 @@
 </head>
 <body>
 Time: ${time?datetime}
-<br>
-Message: ${message}
-<form method="post" action="user/login">
+<form method="post">
     <input name="username" placeholder="Username">
     <br>
     <input type="password" name="password" placeholder="Password">
     <br>
-    <button type="button" id="submit">Submit</button>
+    <input type="checkbox" name="remember" value="true"> remember me
+    <br>
+
+    <button type="submit">Submit</button>
+<#--<button type="button" id="submit">Submit</button>-->
     <button type="button" id="test">Test</button>
-    <span id="msg" style="color: red;"></span>
+    <span id="msg" style="color: red;">${message!''}</span>
 </form>
 </body>
 <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>

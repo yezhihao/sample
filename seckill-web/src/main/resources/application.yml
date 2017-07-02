@@ -6,4 +6,4 @@ server:
   port: 80
   context-path: /
 
-seckill-service: http://127.0.0.1:8080/sample-service
+seckill-service: http://127.0.0.1:8080/seckill-service

@@ -16,12 +16,12 @@ INSERT INTO `group`
 DELETE FROM `user` WHERE id < 10;
 INSERT INTO `user`
 (id, username, group_id, gender, password) VALUES
-(1, 'admin', 1, 1, '123456'),
-(2, 'zhangsan1', 1, 1, '123456'),
-(3, 'zhangsan2', 2, 1, '123456'),
-(4, 'lisi1', 1, 1, '123456'),
-(5, 'lisi2', 1, 2, '123456'),
-(6, 'wangwu1', 1, 0, '123456'),
-(7, 'wangwu2', 1, 2, '123456'),
-(8, 'zhaoliu1', 1, 1, '123456'),
+(1, 'admin', 1, 1, 'e10adc3949ba59abbe56e057f20f883e'),
+(2, 'zhangsan1', 1, 1, 'e10adc3949ba59abbe56e057f20f883e'),
+(3, 'zhangsan2', 2, 1, 'e10adc3949ba59abbe56e057f20f883e'),
+(4, 'lisi1', 1, 1, 'e10adc3949ba59abbe56e057f20f883e'),
+(5, 'lisi2', 1, 2, 'e10adc3949ba59abbe56e057f20f883e'),
+(6, 'wangwu1', 1, 0, 'e10adc3949ba59abbe56e057f20f883e'),
+(7, 'wangwu2', 1, 2, 'e10adc3949ba59abbe56e057f20f883e'),
+(8, 'zhaoliu1', 1, 1, 'e10adc3949ba59abbe56e057f20f883e'),
 (9, 'zhaoliu2', 1, 0, '123456');

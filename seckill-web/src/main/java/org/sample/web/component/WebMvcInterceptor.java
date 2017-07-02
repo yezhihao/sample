@@ -15,7 +15,7 @@ public class WebMvcInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         Object user = session.getAttribute(SessionKey.USER);
         if (user == null) {
-            response.sendRedirect("/");
+            response.sendRedirect("/user/login?from=" + request.getRequestURL());
             return false;
         }
         return true;

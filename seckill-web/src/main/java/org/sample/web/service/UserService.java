@@ -10,5 +10,10 @@ public interface UserService {
 
     @RequestMapping(value = "user/login", method = RequestMethod.POST)
     @ResponseBody
-    APIResult<User> login(@RequestParam("username") String username, @RequestParam("password") String password);
+    APIResult<User> login(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("slat") String slat);
+
+    @RequestMapping(value = "user/loginByToken", method = RequestMethod.POST)
+    @ResponseBody
+    APIResult<User> loginByToken(@RequestParam("username") String username, @RequestParam("token") String token, @RequestParam("slat") String slat);
+
 }

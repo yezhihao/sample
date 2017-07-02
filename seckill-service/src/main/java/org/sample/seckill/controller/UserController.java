@@ -1,19 +1,20 @@
 package org.sample.seckill.controller;
 
-import java.util.List;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.sample.commons.lang.StringUtils;
 import org.sample.model.APIResult;
 import org.sample.model.PageInfo;
 import org.sample.model.Pagination;
 import org.sample.seckill.enums.ResultCodes;
-import org.sample.seckill.service.UserService;
 import org.sample.seckill.mapper.UserMapper;
 import org.sample.seckill.model.User;
+import org.sample.seckill.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Api(description = "user")
 @Controller
@@ -46,6 +47,10 @@ public class UserController {
     @RequestMapping(value = "create", method = RequestMethod.POST)
     @ResponseBody
     public APIResult<User> create(@RequestBody User user) {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        if (StringUtils.isBlank(username) || StringUtils.isBlank(password))
+            return new APIResult(ResultCodes.S300);
         userService.register(user);
         return new APIResult(user);
     }
@@ -53,9 +58,23 @@ public class UserController {
     @ApiOperation(value = "login")
     @RequestMapping(value = "login", method = RequestMethod.POST)
     @ResponseBody
-    public APIResult<User> login(@RequestParam("username") String username, @RequestParam("password") String password) {
-        User user = dao.selectByUsername(username);
-        if (user != null && user.getPassword().equalsIgnoreCase(password))
+    public APIResult<User> login(@RequestParam("username") String username,
+                                 @RequestParam("password") String password,
+                                 @RequestParam(value = "slat", required = false) String slat) {
+        User user = userService.login(username, password, slat);
+        if (user != null)
+            return new APIResult(user);
+        return new APIResult(ResultCodes.NotFoundUser);
+    }
+
+    @ApiOperation(value = "loginByToken")
+    @RequestMapping(value = "loginByToken", method = RequestMethod.POST)
+    @ResponseBody
+    public APIResult<User> loginByToken(@RequestParam("username") String username,
+                                        @RequestParam("token") String token,
+                                        @RequestParam(value = "slat", required = false) String slat) {
+        User user = userService.loginByToken(username, token, slat);
+        if (user != null)
             return new APIResult(user);
         return new APIResult(ResultCodes.NotFoundUser);
     }
