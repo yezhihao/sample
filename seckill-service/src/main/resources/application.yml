@@ -15,7 +15,6 @@ spring:
     schema: classpath:sql/database.sql
     data: classpath:sql/initial.sql
   redis:
-#    database:
     host: 127.0.0.1
     port: 6379
     password:
@@ -23,6 +22,19 @@ spring:
       max-idle: 10
       max-active: 30
       max-wait: 1000
+  kafka:
+    template:
+      default-topic: test1
+    listener:
+      concurrency: 3
+    consumer:
+      group-id: 1
+      bootstrap-servers:
+      - 127.0.0.1:9092
+    producer:
+      batch-size: 1000
+      bootstrap-servers:
+      - 127.0.0.1:9092
 
 server:
   port: 8080
