@@ -18,12 +18,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(MessageHandler.class.getSimpleName());
+    private static final Logger log = LoggerFactory.getLogger(MessageHandler.class);
 
     /**
      * 切点
      */
-    @Pointcut("execution(public * org.sample.seckill.controller.*.*(..))")
+    @Pointcut("execution(public * org.sample.seckill.mapper.*.*(..))")
     public void pointcut() {
     }
 
@@ -34,7 +34,9 @@ public class MessageHandler {
     public Object around(ProceedingJoinPoint point) throws Throwable {
         StopWatch watch = new StopWatch();
         Object result = point.proceed();
-        log.info(point.getSignature().getName() + watch.show());
+        long totalTime = watch.stop();
+        if (totalTime > 500)
+            log.info(point.getSignature() + watch.show());
         return result;
     }
 
