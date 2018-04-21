@@ -1,15 +1,14 @@
 package org.sample.seckill.controller;
 
-import java.util.List;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.sample.seckill.dto.Exposer;
+import org.sample.component.mybatis.Page;
 import org.sample.model.*;
-import org.sample.exception.APIException;
-import org.sample.seckill.enums.ResultCodes;
-import org.sample.seckill.model.Seckill;
-import org.sample.seckill.model.SeckillRecord;
+import org.sample.model.exception.APIException;
+import org.sample.seckill.model.entity.Seckill;
+import org.sample.seckill.model.entity.SeckillRecord;
+import org.sample.seckill.model.enums.ResultCodes;
+import org.sample.seckill.model.vo.Exposer;
 import org.sample.seckill.service.SeckillService;
 import org.sample.seckill.mapper.SeckillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,17 +31,16 @@ public class SeckillController {
     @RequestMapping(value = "seckill/list/{index}", method = RequestMethod.GET)
     @ResponseBody
     public APIResult<Pagination<Seckill>> search(@PathVariable Integer index) {
-        PageInfo pageInfo = new PageInfo(index);
-        List<Seckill> list = mapper.select(new Seckill());
-        return new APIResult(new Pagination(pageInfo, list));
+        Pagination result = Page.start(() -> mapper.select(new Seckill()), new PageInfo(index));
+        return new APIResult(result);
     }
 
     @ApiOperation(value = "查询")
     @RequestMapping(value = "seckill/list", method = RequestMethod.POST)
     @ResponseBody
-    public APIResult<Pagination<Seckill>> search(@RequestBody Seckill seckill) {
-        List<Seckill> list = mapper.select(seckill);
-        return new APIResult(new Pagination(seckill.getPageInfo(), list));
+    public APIResult<Pagination<Seckill>> search(@RequestBody Seckill seckill, PageInfo pageInfo) {
+        Pagination result = Page.start(() -> mapper.select(seckill), pageInfo);
+        return new APIResult(result);
     }
 
     @ApiOperation(value = "详情")

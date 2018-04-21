@@ -1,6 +1,6 @@
 package org.sample.seckill.service;
 
-import org.sample.seckill.model.User;
+import org.sample.seckill.model.entity.User;
 
 public interface UserService {
 

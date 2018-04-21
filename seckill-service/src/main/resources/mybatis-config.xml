@@ -8,8 +8,4 @@
         <setting name="lazyLoadingEnabled" value="true"/>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
-    <typeHandlers>
-        <typeHandler handler="org.sample.component.mybatis.ValuedEnumHandler" jdbcType="TINYINT"
-                     javaType="org.sample.seckill.enums.Gender"/>
-    </typeHandlers>
 </configuration>

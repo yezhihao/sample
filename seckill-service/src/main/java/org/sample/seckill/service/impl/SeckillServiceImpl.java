@@ -1,19 +1,21 @@
 package org.sample.seckill.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.collections.map.LRUMap;
-import org.sample.commons.lang.MapUtils;
-import org.sample.seckill.dto.Exposer;
-import org.sample.exception.APIException;
-import org.sample.seckill.enums.ResultCodes;
+import org.sample.commons.lang.DateUtils;
+import org.sample.model.exception.APIException;
+import org.sample.seckill.model.vo.Exposer;
+import org.sample.seckill.model.enums.ResultCodes;
 import org.sample.seckill.service.SeckillService;
 import org.sample.seckill.mapper.SeckillMapper;
 import org.sample.seckill.mapper.SeckillRecordMapper;
-import org.sample.seckill.model.Seckill;
-import org.sample.seckill.model.SeckillRecord;
+import org.sample.seckill.model.entity.Seckill;
+import org.sample.seckill.model.entity.SeckillRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,11 +41,11 @@ public class SeckillServiceImpl implements SeckillService {
         Seckill seckill = getSeckill(seckillId);
         if (seckill == null)
             return new Exposer(false, seckillId);
-        Date startTime = seckill.getStartTime();
-        Date endTime = seckill.getEndTime();
-        Date currentTime = new Date();
-        if (currentTime.before(startTime) || currentTime.after(endTime))
-            return new Exposer(false, seckillId, currentTime.getTime(), startTime.getTime(), endTime.getTime());
+        LocalDateTime startTime = seckill.getStartTime();
+        LocalDateTime endTime = seckill.getEndTime();
+        LocalDateTime currentTime = LocalDateTime.now();
+        if (currentTime.isBefore(startTime) || currentTime.isAfter(endTime))
+            return new Exposer(false, seckillId, DateUtils.getMillis(currentTime), DateUtils.getMillis(startTime), DateUtils.getMillis(endTime));
 
         String md5 = getMD5(seckillId);
         return new Exposer(true, md5, seckillId);
@@ -94,7 +96,7 @@ public class SeckillServiceImpl implements SeckillService {
     public SeckillRecord executeSeckillProcedure(int seckillId, String userMobile, String md5) {
         if (md5 == null || !md5.equalsIgnoreCase(getMD5(seckillId)))
             throw new APIException(ResultCodes.S401);
-        Date killTime = new Date();
+        LocalDateTime killTime = LocalDateTime.now();
         Map<String, Object> params = new HashMap<>();
         params.put("seckillId", seckillId);
         params.put("userMobile", userMobile);

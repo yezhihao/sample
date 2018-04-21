@@ -1,11 +1,11 @@
-package org.sample.seckill.model;
+package org.sample.seckill.model.entity;
 
-import org.sample.model.BaseBO;
-import org.sample.seckill.enums.Gender;
+import org.sample.model.BaseDO;
+import org.sample.seckill.model.enums.Gender;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
-public class User extends BaseBO {
+public class User extends BaseDO {
 
     private String username;
 
@@ -17,7 +17,9 @@ public class User extends BaseBO {
 
     private Gender gender;
 
-    private Date updateTime;
+    private LocalDateTime createTime;
+
+    private LocalDateTime updateTime;
 
     public User() {
     }
@@ -67,12 +69,19 @@ public class User extends BaseBO {
         this.gender = gender;
     }
 
-    public Date getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
 }

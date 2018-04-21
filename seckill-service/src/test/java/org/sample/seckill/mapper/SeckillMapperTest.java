@@ -2,14 +2,14 @@ package org.sample.seckill.mapper;
 
 import static org.junit.Assert.fail;
 
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.sample.component.mybatis.Page;
+import org.sample.model.Pagination;
 import org.sample.seckill.Application;
 import org.sample.model.PageInfo;
-import org.sample.seckill.model.Seckill;
+import org.sample.seckill.model.entity.Seckill;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +44,9 @@ public class SeckillMapperTest {
     @Test
     public void testSelect() {
         Seckill record = new Seckill();
-        record.setPageInfo(new PageInfo(1, 1));
-        List<Seckill> result = mapper.select(record);
+        Pagination result = Page.start(() -> mapper.select(record), new PageInfo(1, 10));
         log.info(result.toString());
-        Assert.assertTrue(!result.isEmpty());
+        Assert.assertTrue(!result.getList().isEmpty());
     }
 
     @Test

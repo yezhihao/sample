@@ -1,6 +1,6 @@
 package org.sample.web.component;
 
-import org.sample.seckill.model.User;
+import org.sample.seckill.model.entity.User;
 import org.sample.web.config.SessionKey;
 import org.springframework.web.socket.*;
 import org.springframework.web.socket.handler.TextWebSocketHandler;

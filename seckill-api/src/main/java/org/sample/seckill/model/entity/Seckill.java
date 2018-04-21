@@ -1,28 +1,23 @@
-package org.sample.seckill.model;
-
-import java.util.Date;
+package org.sample.seckill.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.sample.model.BaseBO;
-import org.sample.model.PageInfo;
+import org.sample.model.BaseDO;
 
-public class Seckill extends BaseBO {
+import java.time.LocalDateTime;
+
+public class Seckill extends BaseDO {
 
     private String name;
 
     private Integer count;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date startTime;
+    private LocalDateTime startTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date endTime;
+    private LocalDateTime endTime;
 
     public Seckill() {
-    }
-
-    public Seckill(PageInfo pageInfo) {
-        this.pageInfo = pageInfo;
     }
 
     public String getName() {
@@ -41,19 +36,19 @@ public class Seckill extends BaseBO {
         this.count = count;
     }
 
-    public Date getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 

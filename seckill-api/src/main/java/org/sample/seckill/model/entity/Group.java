@@ -1,18 +1,20 @@
-package org.sample.seckill.model;
+package org.sample.seckill.model.entity;
 
-import org.sample.model.BaseBO;
+import org.sample.model.BaseDO;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class Group extends BaseBO {
+public class Group extends BaseDO {
 
     /** 组名 */
     private String name;
 
     /** 上次更新时间 */
-    private Date updateTime;
+    private LocalDateTime updateTime;
+
+    private LocalDateTime createTime;
 
     /** 用户列表 */
     private List<User> users;
@@ -25,12 +27,20 @@ public class Group extends BaseBO {
         this.name = name;
     }
 
-    public Date getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
 
     public List<User> getUsers() {

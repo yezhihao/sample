@@ -3,7 +3,7 @@ package org.sample.seckill.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.sample.seckill.model.User;
+import org.sample.seckill.model.entity.User;
 
 @Mapper
 public interface UserMapper {

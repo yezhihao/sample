@@ -1,13 +1,13 @@
 package org.sample.seckill.controller;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.sample.exception.APIException;
 import org.sample.model.APIResult;
-import org.sample.seckill.enums.ResultCodes;
-import org.sample.seckill.model.User;
+import org.sample.model.exception.APIException;
+import org.sample.seckill.model.enums.ResultCodes;
+import org.sample.seckill.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -54,7 +54,7 @@ public class SimpleController {
     public APIResult<User> test(@RequestParam(required = false, defaultValue = "not named") String username) {
         User user = new User();
         user.setUsername(username);
-        user.setCreateTime(new Date());
+        user.setCreateTime(LocalDateTime.now());
         return new APIResult(user);
     }
 
@@ -64,7 +64,7 @@ public class SimpleController {
     public APIResult<User> testMap(@RequestBody User param) {
         User user = new User();
         user.setUsername(param.getUsername());
-        user.setCreateTime(new Date());
+        user.setCreateTime(LocalDateTime.now());
         return new APIResult(user);
     }
 

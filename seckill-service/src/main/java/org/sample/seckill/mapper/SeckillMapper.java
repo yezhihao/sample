@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.sample.seckill.model.Seckill;
+import org.sample.seckill.model.entity.Seckill;
 
 @Mapper
 public interface SeckillMapper {

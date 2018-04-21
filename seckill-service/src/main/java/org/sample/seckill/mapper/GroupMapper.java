@@ -1,7 +1,7 @@
 package org.sample.seckill.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.sample.seckill.model.Group;
+import org.sample.seckill.model.entity.Group;
 
 @Mapper
 public interface GroupMapper {

@@ -4,7 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.sample.seckill.mapper.GroupMapper;
 import org.sample.model.APIResult;
-import org.sample.seckill.model.Group;
+import org.sample.seckill.model.entity.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;

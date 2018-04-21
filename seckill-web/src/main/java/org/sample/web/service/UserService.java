@@ -1,7 +1,7 @@
 package org.sample.web.service;
 
 import org.sample.model.APIResult;
-import org.sample.seckill.model.User;
+import org.sample.seckill.model.entity.User;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

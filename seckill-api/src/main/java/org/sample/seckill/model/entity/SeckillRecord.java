@@ -1,16 +1,18 @@
-package org.sample.seckill.model;
+package org.sample.seckill.model.entity;
 
-import org.sample.model.BaseBO;
+import org.sample.model.BaseDO;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
-public class SeckillRecord extends BaseBO {
+public class SeckillRecord extends BaseDO {
 
     private Integer seckillId;
 
     private String userMobile;
 
     private Seckill seckill;
+
+    private LocalDateTime createTime;
 
     public SeckillRecord() {
     }
@@ -20,7 +22,7 @@ public class SeckillRecord extends BaseBO {
         this.userMobile = userMobile;
     }
 
-    public SeckillRecord(Integer seckillId, String userMobile, Date createTime) {
+    public SeckillRecord(Integer seckillId, String userMobile, LocalDateTime createTime) {
         this.seckillId = seckillId;
         this.userMobile = userMobile;
         this.createTime = createTime;
@@ -50,6 +52,14 @@ public class SeckillRecord extends BaseBO {
         this.seckill = seckill;
     }
 
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -74,5 +84,4 @@ public class SeckillRecord extends BaseBO {
         result = prime * result + ((seckillId == null) ? 0 : seckillId.hashCode());
         return result;
     }
-
 }

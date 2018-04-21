@@ -1,6 +1,6 @@
-package org.sample.seckill.enums;
+package org.sample.seckill.model.enums;
 
-import org.sample.enums.ResultCode;
+import org.sample.model.enums.ResultCode;
 
 public enum ResultCodes implements ResultCode {
 

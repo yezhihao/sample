@@ -1,8 +1,8 @@
 package org.sample.seckill.controller;
 
-import org.sample.enums.ResultCodes;
-import org.sample.exception.APIException;
 import org.sample.model.APIResult;
+import org.sample.model.enums.DefaultCodes;
+import org.sample.model.exception.APIException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.TypeMismatchException;
@@ -40,38 +40,38 @@ public class ExceptionController {
     @ResponseBody
     public APIResult onHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         log.warn("系统异常:", e);
-        return new APIResult(ResultCodes.TypeMismatch, e);
+         return new APIResult(DefaultCodes.TypeMismatch, e);
     }
 
     @ExceptionHandler(HttpMediaTypeException.class)
     @ResponseBody
     public APIResult onHttpMessageNotReadableException(HttpMediaTypeException e) {
         log.warn("系统异常:", e);
-        return new APIResult(ResultCodes.NotSupportedType, e.getMessage());
+        return new APIResult(DefaultCodes.NotSupportedType, e.getMessage());
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseBody
     public APIResult onMissingServletRequestParameterException(MissingServletRequestParameterException e) {
-        return new APIResult(ResultCodes.MissingParameter, ":" + e.getParameterName());
+        return new APIResult(DefaultCodes.MissingParameter, ":" + e.getParameterName());
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     @ResponseBody
     public APIResult MethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
-        return new APIResult(ResultCodes.TypeMismatch, ":" + e.getName());
+        return new APIResult(DefaultCodes.TypeMismatch, ":" + e.getName());
     }
 
     @ExceptionHandler(TypeMismatchException.class)
     @ResponseBody
     public APIResult onTypeMismatchException(TypeMismatchException e) {
-        return new APIResult(ResultCodes.TypeMismatch, ":" + e.getPropertyName());
+        return new APIResult(DefaultCodes.TypeMismatch, ":" + e.getPropertyName());
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseBody
     public APIResult onHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
-        return new APIResult(ResultCodes.NotImplemented, e);
+        return new APIResult(DefaultCodes.NotImplemented, e);
     }
 
 }

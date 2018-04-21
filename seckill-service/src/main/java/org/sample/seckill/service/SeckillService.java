@@ -1,7 +1,7 @@
 package org.sample.seckill.service;
 
-import org.sample.seckill.dto.Exposer;
-import org.sample.seckill.model.SeckillRecord;
+import org.sample.seckill.model.vo.Exposer;
+import org.sample.seckill.model.entity.SeckillRecord;
 
 public interface SeckillService {
 

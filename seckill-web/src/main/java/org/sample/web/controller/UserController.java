@@ -1,8 +1,8 @@
 package org.sample.web.controller;
 
-import org.sample.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.sample.model.APIResult;
-import org.sample.seckill.model.User;
+import org.sample.seckill.model.entity.User;
 import org.sample.web.config.CookieName;
 import org.sample.web.config.SessionKey;
 import org.sample.web.service.UserService;

@@ -1,10 +1,10 @@
 package org.sample.web.service;
 
-import org.sample.seckill.dto.Exposer;
 import org.sample.model.APIResult;
 import org.sample.model.Pagination;
-import org.sample.seckill.model.Seckill;
-import org.sample.seckill.model.SeckillRecord;
+import org.sample.seckill.model.entity.Seckill;
+import org.sample.seckill.model.entity.SeckillRecord;
+import org.sample.seckill.model.vo.Exposer;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

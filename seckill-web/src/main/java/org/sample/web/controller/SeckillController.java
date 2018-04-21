@@ -1,13 +1,13 @@
 package org.sample.web.controller;
 
-import org.sample.commons.lang.StringUtils;
-import org.sample.seckill.dto.Exposer;
+import org.apache.commons.lang3.StringUtils;
 import org.sample.model.APIResult;
+import org.sample.model.exception.APIException;
+import org.sample.seckill.model.vo.Exposer;
 import org.sample.model.Pagination;
-import org.sample.exception.APIException;
-import org.sample.seckill.enums.ResultCodes;
-import org.sample.seckill.model.Seckill;
-import org.sample.seckill.model.SeckillRecord;
+import org.sample.seckill.model.enums.ResultCodes;
+import org.sample.seckill.model.entity.Seckill;
+import org.sample.seckill.model.entity.SeckillRecord;
 import org.sample.web.service.SeckillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;

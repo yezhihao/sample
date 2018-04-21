@@ -2,19 +2,18 @@ package org.sample.seckill.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.sample.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.sample.component.mybatis.Page;
 import org.sample.model.APIResult;
 import org.sample.model.PageInfo;
 import org.sample.model.Pagination;
-import org.sample.seckill.enums.ResultCodes;
 import org.sample.seckill.mapper.UserMapper;
-import org.sample.seckill.model.User;
+import org.sample.seckill.model.entity.User;
+import org.sample.seckill.model.enums.ResultCodes;
 import org.sample.seckill.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Api(description = "user")
 @Controller
@@ -86,17 +85,16 @@ public class UserController {
         PageInfo pageInfo = new PageInfo(index);
         User user = new User();
         user.setGroupId(groupId);
-        user.setPageInfo(pageInfo);
+        Pagination result = Page.start(() -> dao.select(user), pageInfo);
 
-        List<User> list = dao.select(user);
-        return new APIResult(new Pagination(pageInfo, list));
+        return new APIResult(result);
     }
 
     @ApiOperation(value = "search")
     @RequestMapping(value = "search", method = RequestMethod.POST)
     @ResponseBody
-    public APIResult<Pagination<User>> search(@RequestBody User user) {
-        List<User> list = dao.select(user);
-        return new APIResult(new Pagination(user.getPageInfo(), list));
+    public APIResult<Pagination<User>> search(@RequestBody User user, PageInfo pageInfo) {
+        Pagination result = Page.start(() -> dao.select(user), pageInfo);
+        return new APIResult(result);
     }
 }

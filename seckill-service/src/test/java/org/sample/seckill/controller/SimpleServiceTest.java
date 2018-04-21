@@ -7,7 +7,7 @@ import org.sample.seckill.commons.HttpTest;
 import org.sample.seckill.commons.MultiThreadTest;
 import org.sample.commons.io.JsonUtils;
 import org.sample.model.Pagination;
-import org.sample.seckill.model.User;
+import org.sample.seckill.model.entity.User;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 

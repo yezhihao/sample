@@ -1,8 +1,6 @@
-package org.sample.seckill.dto;
+package org.sample.seckill.model.vo;
 
-import org.sample.model.BaseVO;
-
-public class Exposer extends BaseVO {
+public class Exposer {
 
     /** 是否开启秒杀 */
     private boolean exposed;
