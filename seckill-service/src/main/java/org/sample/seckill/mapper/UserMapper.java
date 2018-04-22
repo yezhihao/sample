@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.sample.seckill.model.entity.User;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface UserMapper {
 
     List<User> select(User user);

@@ -7,8 +7,10 @@ import org.sample.seckill.model.entity.SeckillRecord;
 import org.sample.seckill.model.vo.Exposer;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+@Component
 @FeignClient(url = "${seckill-service}", name = "SeckillService")
 public interface SeckillService {
 

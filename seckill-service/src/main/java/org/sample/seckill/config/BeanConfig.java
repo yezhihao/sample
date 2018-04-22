@@ -7,9 +7,9 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.sample.commons.lang.DateUtils;
 import org.sample.component.mybatis.PageInterceptor;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,17 +24,15 @@ public class BeanConfig {
     }
 
     @Bean
-    public Jackson2ObjectMapperBuilderCustomizer customizeJackson2ObjectMapper() {
-        return builder -> {
-            JavaTimeModule module = new JavaTimeModule();
+    public Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder() {
+        JavaTimeModule module = new JavaTimeModule();
 
-            module.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateUtils.DATE_TIME_FORMATTER));
-            module.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateUtils.DATE_TIME_FORMATTER));
+        module.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateUtils.DATE_TIME_FORMATTER));
+        module.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateUtils.DATE_TIME_FORMATTER));
 
-            module.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ISO_LOCAL_DATE));
-            module.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ISO_LOCAL_DATE));
+        module.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ISO_LOCAL_DATE));
+        module.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ISO_LOCAL_DATE));
 
-            builder.modules(module);
-        };
+        return new Jackson2ObjectMapperBuilder().modules(module);
     }
 }

@@ -41,7 +41,7 @@ public class RedisConfig {
     }
 
     @Bean
-    public CacheManager cacheManager(RedisTemplate redisTemplate) {
+    public CacheManager cacheManager(RedisTemplate<Object, Object> redisTemplate) {
         return new RedisCacheManager(redisTemplate);
     }
 

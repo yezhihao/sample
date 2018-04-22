@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.*;
 public class SimpleController {
 
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    private RedisTemplate redisTemplate;
 
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+//    @Autowired
+    private KafkaTemplate kafkaTemplate;
 
     @ApiOperation(value = "kafka/send")
     @RequestMapping(value = "kafka/send")

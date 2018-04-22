@@ -11,7 +11,7 @@ import org.springframework.kafka.support.ProducerListener;
  */
 public class KafkaProducer {
 
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate kafkaTemplate;
 
     public void send() {
         kafkaTemplate.send("test1", "dddd1");
