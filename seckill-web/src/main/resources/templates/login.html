@@ -1,35 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
 <head>
     <title>Welcome</title>
 </head>
 <body>
-Time: ${time?datetime}
+<h3 th:text="'Time:'+${#temporals.format(#temporals.createNow(),'yyyy-MM-dd HH:mm:ss')}"></h3>
 <form method="post">
-    <input name="username" placeholder="Username">
-    <br>
-    <input type="password" name="password" placeholder="Password">
-    <br>
-    <input type="checkbox" name="remember" value="true"> remember me
-    <br>
+    <input name="username" placeholder="Username"/>
+    <br/>
+    <input type="password" name="password" placeholder="Password"/>
+    <br/>
+    <input type="checkbox" name="remember" value="true"/> remember me
+    <br/>
 
     <button type="submit">Submit</button>
-<#--<button type="button" id="submit">Submit</button>-->
+    <!--<button type="button" id="submit">Submit</button>-->
     <button type="button" id="test">Test</button>
-    <span id="msg" style="color: red;">${message!''}</span>
+    <span id="msg" style="color: red;" th:text="${message}"></span>
 </form>
 </body>
 <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script>
+<script th:inline="javascript">
+    var contextPath = /*[[@{/}]]*/ '/';
+
     var form = $(document.forms[0]);
     $("#submit").on("click", function () {
         $.ajax({
-            url: form.attr('action'),
+            url: contextPath + form.attr('action'),
             type: 'post',
             data: form.serialize(),
             success: function (result) {
                 if (result.code == 0) {
-                    window.location.href = "index.html"
+                    window.location.href = contextPath + "index.html"
                 } else {
                     $("#msg").append(result.msg);
                 }
@@ -38,12 +40,12 @@ Time: ${time?datetime}
     });
     $("#test").on("click", function () {
         $.ajax({
-            url: form.attr('action'),
+            url: contextPath + form.attr('action'),
             type: 'post',
             data: {},
             success: function (result) {
                 if (result.code == 0) {
-                    window.location.href = "index.html"
+                    window.location.href = contextPath + "index.html"
                 } else {
                     $("#msg").append(result.msg);
                 }

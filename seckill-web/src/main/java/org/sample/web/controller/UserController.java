@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
@@ -25,21 +24,18 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(value = {"login", "/"}, method = RequestMethod.GET)
-    public String welcome(
-            @RequestParam(value = "from", required = false, defaultValue = "/index.html") String from,
-            @CookieValue(value = "username", required = false) String username,
-            @CookieValue(value = "token", required = false) String token,
-            HttpServletResponse response,
-            HttpSession session,
-            Map<String, Object> model) throws IOException {
+    public String welcome(@RequestParam(required = false, defaultValue = "/index.html") String from,
+                          @CookieValue(required = false) String username,
+                          @CookieValue(required = false) String token,
+                          HttpSession session,
+                          Map<String, Object> model) {
 
         if (StringUtils.isNotEmpty(username) && StringUtils.isNotEmpty(token)) {
             APIResult<User> result = userService.loginByToken(username, token, null);
 
             if (result.isSuccess()) {
                 session.setAttribute(SessionKey.USER, result.getData());
-                response.sendRedirect(from);
-                return null;
+                return "redirect:" + from;
             }
         }
 
@@ -48,13 +44,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(@RequestParam(value = "from", required = false, defaultValue = "/index.html") String from,
-                        @RequestParam(value = "username") String username,
-                        @RequestParam(value = "password") String password,
-                        @RequestParam(value = "remember", required = false, defaultValue = "false") boolean remember,
+    public String login(@RequestParam(required = false, defaultValue = "/index.html") String from,
+                        @RequestParam String username,
+                        @RequestParam String password,
+                        @RequestParam(required = false, defaultValue = "false") boolean remember,
                         HttpServletResponse response,
                         HttpSession session,
-                        Map<String, Object> model) throws IOException {
+                        Map<String, Object> model) {
         APIResult<User> result = userService.login(username, password, "");
         if (result.isSuccess()) {
             User user = result.getData();
@@ -63,8 +59,7 @@ public class UserController {
                 response.addCookie(newCookie(CookieName.USERNAME, username, 864000));
                 response.addCookie(newCookie(CookieName.TOKEN, user.getPassword(), 864000));
             }
-            response.sendRedirect(from);
-            return null;
+            return "redirect:" + from;
         } else {
             model.put("time", new Date());
             model.put("message", result.getMsg());

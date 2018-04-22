@@ -1,6 +1,8 @@
 package org.sample.web.component;
 
 import org.sample.web.config.SessionKey;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -10,12 +12,16 @@ import javax.servlet.http.HttpSession;
 
 public class WebMvcInterceptor implements HandlerInterceptor {
 
+    @Qualifier("contextPath")
+    @Autowired
+    String contextPath;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
         Object user = session.getAttribute(SessionKey.USER);
         if (user == null) {
-            response.sendRedirect("/user/login?from=" + request.getRequestURL());
+            response.sendRedirect(contextPath + "/user/login?from=" + request.getRequestURL());
             return false;
         }
         return true;

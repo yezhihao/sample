@@ -1,13 +1,13 @@
 var seckill = {
     URL: {
         now: function () {
-            return '/seckill/time/now';
+            return contextPath + 'seckill/time/now';
         },
         exposer: function (seckillId) {
-            return '/seckill/' + seckillId + '/exposer';
+            return contextPath + 'seckill/' + seckillId + '/exposer';
         },
         execution: function (seckillId, md5) {
-            return '/seckill/' + seckillId + '/' + md5 + '/execution';
+            return contextPath + 'seckill/' + seckillId + '/' + md5 + '/execution';
         }
     },
     handleSeckill: function (seckillId, node) {
@@ -80,7 +80,7 @@ var seckill = {
                     if (seckill.valdateMobile(inputMoblie)) {
                         $.cookie('userMobile', inputMoblie, {
                             expires: 7,
-                            path: '/seckill'
+                            path: contextPath + 'seckill'
                         });
                         window.location.reload();
                     } else {

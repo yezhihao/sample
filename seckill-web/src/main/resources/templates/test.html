@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>列表</title>
+</head>
+<body>
+<ul id="list">
+</ul>
+</body>
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" th:inline="javascript">
+    //<![CDATA[
+    var total = /*[[${totalPage}]]*/ '10';
+    var page = /*[[${page}]]*/ '1';
+
+    window.onload = buildPageNo(total, page);
+
+    function buildPageNo(total, index) {
+        var size = 10;
+        var left = size / 2 + 1;
+        var right = total - left;
+
+        var show = 0;
+        var htm = "";
+        for (var i = 1; i <= size; i++) {
+            if (index < left) {
+                show = i;
+            } else if (index > right) {
+                show = i + total - size;
+            } else {
+                show = i + index - left;
+            }
+            htm += '<li class="firstPage"><a href="test?page=' + show + '">' + show + '</a></li>'
+        }
+        $('#list').html(htm);
+    }
+    //]]>
+</script>
+</html>

@@ -1,11 +1,11 @@
-<#import "spring.ftl" as s />
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>秒杀页列表</title>
-<#include "commons/css.ftl">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="http://cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
@@ -27,23 +27,26 @@
                 </tr>
                 </thead>
                 <tbody>
-                <#list list as sk>
-                <tr>
-                    <td>${sk.name}</td>
-                    <td>${sk.count}</td>
-                    <td>${sk.startTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-                    <td>${sk.endTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-                    <td>${sk.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-                    <td><a class="btn btn-info" href="<@s.url '/seckill/${sk.id}/detail'/>" target="blank">link</a></td>
+                <tr th:each="sk : ${list}">
+                    <td th:text="${sk.name}"></td>
+                    <td th:text="${sk.count}"></td>
+                    <td th:text="${#temporals.format(sk.startTime)}"></td>
+                    <td th:text="${#temporals.format(sk.endTime)}"></td>
+                    <td th:text="${#temporals.format(sk.createTime,'yyyy-MM-dd')}"></td>
+                    <td><a th:href="@{'/seckill/'+${sk.id}+'/detail'}" class="btn btn-info" href="" target="blank">link</a></td>
                 </tr>
-                </#list>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 </body>
-<#include "commons/script.ftl">
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
+<script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
+<script src="http://cdn.bootcss.com/select2/4.0.3/js/i18n/zh-CN.js"></script>
 <script>
     $(".select2").select2({
         ajax: {

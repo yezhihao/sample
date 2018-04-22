@@ -1,6 +1,6 @@
 package org.sample.seckill.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.sample.commons.lang.DateUtils;
 import org.sample.model.BaseDO;
 
 import java.time.LocalDateTime;
@@ -11,11 +11,11 @@ public class Seckill extends BaseDO {
 
     private Integer count;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime startTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime endTime;
+
+    private LocalDateTime createTime;
 
     public Seckill() {
     }
@@ -52,4 +52,23 @@ public class Seckill extends BaseDO {
         this.endTime = endTime;
     }
 
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    public Long getEndTimeMillis() {
+        if (endTime == null)
+            return null;
+        return DateUtils.getMillis(endTime);
+    }
+
+    public Long getStartTimeMillis() {
+        if (startTime == null)
+            return null;
+        return DateUtils.getMillis(startTime);
+    }
 }

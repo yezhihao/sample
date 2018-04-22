@@ -16,9 +16,12 @@ public class WelcomeController {
     }
 
     @RequestMapping(value = "test", method = RequestMethod.GET)
-    public String test(@RequestParam int page, Map<String, Object> model) {
+    public String test(@RequestParam(required = false, defaultValue = "1") Integer page,
+                       @RequestParam(required = false, defaultValue = "10") Integer size,
+                       Map<String, Object> model) {
         model.put("totalPage", 25);
         model.put("page", page);
+        model.put("size", size);
         return "test";
     }
 }
