@@ -1,6 +1,6 @@
 package org.sample.web.controller;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.sample.model.APIResult;
 import org.sample.seckill.model.entity.User;
 import org.sample.web.config.CookieName;
@@ -8,7 +8,10 @@ import org.sample.web.config.SessionKey;
 import org.sample.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
